@@ -15,4 +15,4 @@ Además del código base se dan algunos ejemplos.
 Pruebas
 -
 En esa carpeta se encuentran diferentes ejemplo realizadas para, por un lado, familiarizarse con el programa, y por otro lado varios intentos previos hasta lograr que el programa funcionara como deseara.
-Esta carpeta se encuentra en el Drive compartido puesto que ocupaba demasiado para subirla a esta plataforma.
+No se ha llegado a incluir por su volumen, pero en caso de requerirlo se puede compartir con el tribunal
