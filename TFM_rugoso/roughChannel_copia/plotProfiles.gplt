@@ -1,0 +1,41 @@
+# analytical profile data
+D2 = 1 # depth channel395
+offset = 0.0449899 # mean 0 bed of roughChannel found in boxes.txt
+D1 = D2-offset # mean depth roughChannel
+kappa = 0.41 # von karman
+d50 = 0.024 # mean grain diameter
+Ks = 2.0*d50 # Nikuradse roughness
+gradP = 0.0000315828 # pressure gradient roughChannel
+Uf1 = sqrt(gradP*D1) # friction velocity roughChannel
+Uf2 = 0.0079 # friction velocity channel395
+nu1 = 2e-5 # viscosity roughChannel
+nu2 = 2e-5 # viscosity channel395
+Retau = Uf1*D1/nu1
+KsP=Ks*Uf1/nu1
+set terminal pngcairo
+set pointsize 1.5
+######################### Ux velocity plot #########################
+set output 'U.png'
+set key left top
+set xlabel "y^+"
+set ylabel "U^+"
+set logscale x
+plot [yP=1:Retau] \
+"graphs/1000/Uf.xy" u (($1-offset)*Uf1/nu1):($2/Uf1) t "roughChannel", \
+"../channel395/graphs/1000/Uf.xy" u ($1*Uf2/nu2):($2/Uf2) t "channel395", \
+1/kappa*log(30*yP/KsP) lw 2 t "1/kappa*ln\(30y^+/K_s^+)"
+######################### shear stress plot #########################
+set output 'tau.png'
+set key right bottom
+set xlabel "y/D"
+set ylabel "tau/Uf^2"
+unset logscale x
+set xrange [0:1]
+plot \
+"graphs/1000/uv.xy" u (($1-offset)/D1):($2/Uf1**2) t "uv", \
+"graphs/1000/tauVisc.xy" u (($1-offset)/D1):($2/Uf1**2) t "tauvisc", \
+"graphs/1000/tauSgs.xy" u (($1-offset)/D1):($2/Uf1**2) t "tauSgs", \
+'< paste graphs/1000/uv.xy graphs/1000/tauVisc.xy graphs/1000/tauSgs.xy, \
+u (($1-offset)/D1):(($2+$4+$6)/Uf1**2) t "tauTot"
+system('display U.png &')
+system('display tau.png &')

@@ -1,0 +1,4 @@
+postChannelRough.C
+channelIndexRough.C
+
+EXE = $(FOAM_APPBIN)/postChannelRough

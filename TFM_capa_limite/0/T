@@ -1,0 +1,57 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      T;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+dimensions      [0 0 0 1 0 0 0];
+
+internalField   uniform 339.9;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+		value           uniform 339.9;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+
+    wall_membrane
+    {
+        type groovyBC;
+        value      uniform 300;
+        variables "T_a=339.9;L=0.15;Tp_in=301.5;Tp_out=307.35;T_p=Tp_out-(Tp_out-Tp_in)/L*pos().x;delta_mem=0.0001;lambda_mem=0.053;lambda_alim=0.66;delta_alim=0.001;h_agua=613;h_ef=(lambda_alim/delta_alim)*(1/h_agua+delta_mem/lambda_mem);Tm=((Tp_out-(Tp_out-Tp_in)/L*pos().x)+h_ef*T_a)/(1+h_ef);"; //funciona
+        valueExpression    "Tm";
+    }
+
+    wall_up
+    {
+        type groovyBC;
+        value      uniform 300;
+        variables "T_a=339.9;Text=298;L=0.15;delta_ext=0.0132;lambda_ext=15;lambda_alim=0.66;delta_alim=0.001;h_ext=10;h_ef=lambda_alim/delta_alim*(1/h_ext+delta_ext/lambda_ext);T_m=(Text+h_ef*T_a)/(1+h_ef);"; //funciona
+        valueExpression    "T_m";
+    }
+	sides
+	{
+	   type             empty;
+	}
+
+    #includeEtc "caseDicts/setConstraintTypes"
+}
+
+
+// ************************************************************************* //

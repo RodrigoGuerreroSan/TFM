@@ -1,0 +1,57 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2312                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       dictionary;
+    location    "9/uniform/functionObjects";
+    object      functionObjectProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+cdf7e925f5746741c316f5fbcf39ad0dfca90775
+{
+    graphs
+    {
+        vector
+        {
+            average(lineA,U) ( 0 0 0 );
+            min(lineA,U)    ( 1e+300 1e+300 1e+300 );
+            max(lineA,U)    ( -1e+300 -1e+300 -1e+300 );
+            average(lineB,U) ( 0 0 0 );
+            min(lineB,U)    ( 1e+300 1e+300 1e+300 );
+            max(lineB,U)    ( -1e+300 -1e+300 -1e+300 );
+            average(lineC,U) ( 0 0 0 );
+            min(lineC,U)    ( 1e+300 1e+300 1e+300 );
+            max(lineC,U)    ( -1e+300 -1e+300 -1e+300 );
+            average(U)      ( 0 0 0 );
+            min(U)          ( 1e+300 1e+300 1e+300 );
+            max(U)          ( -1e+300 -1e+300 -1e+300 );
+        }
+        label
+        {
+            size(lineA,U)   0;
+            size(lineB,U)   0;
+            size(lineC,U)   0;
+            size(U)         0;
+        }
+    }
+}
+
+graphs
+{
+    U
+    {
+        file            "<case>/postProcessing/graphs/9/lineC_U.xy";
+    }
+}
+
+
+// ************************************************************************* //

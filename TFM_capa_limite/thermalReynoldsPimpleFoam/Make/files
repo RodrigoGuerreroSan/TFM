@@ -1,0 +1,3 @@
+thermalReynoldsPimpleFoam.C
+
+EXE = $(FOAM_APPBIN)/thermalReynoldsPimpleFoam

@@ -1,0 +1,56 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+momentumSource
+{
+    type            meanVelocityForce;
+
+    selectionMode   all;
+
+    fields          (U);
+    Ubar            (0.1335 0 0);
+}
+
+
+porosity
+{
+type explicitPorositySource;
+active true;
+explicitPorositySourceCoeffs
+{
+selectionMode cellZone;
+cellZone bed;
+type DarcyForchheimer;
+DarcyForchheimerCoeffs
+{
+        D 1000; // Fully shedding behavior
+
+        d   ($D $D $D);
+        f   (0 0 0);
+
+        coordinateSystem
+        {
+            origin  (0 0 0);
+            rotation none;
+        }
+
+}
+}
+}
+
+
+
+// ************************************************************************* //

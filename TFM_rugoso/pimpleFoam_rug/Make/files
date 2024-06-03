@@ -1,0 +1,3 @@
+pimpleFoam_rug.C
+
+EXE = $(FOAM_APPBIN)/pimpleFoam_rug

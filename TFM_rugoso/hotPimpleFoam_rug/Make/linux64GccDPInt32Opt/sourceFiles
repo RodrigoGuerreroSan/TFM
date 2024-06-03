@@ -1,0 +1,4 @@
+SOURCE = \
+hotPimpleFoam_rug.C \
+
+# sources
